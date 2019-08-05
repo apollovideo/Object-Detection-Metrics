@@ -22,9 +22,10 @@ def getBoundingBoxes():
     allBoundingBoxes = BoundingBoxes()
     import glob
     import os
+
     # Read ground truths
     currentPath = os.path.dirname(os.path.abspath(__file__))
-    folderGT = os.path.join(currentPath, 'groundtruths')
+    folderGT = os.path.join(currentPath, "groundtruths")
     os.chdir(folderGT)
     files = glob.glob("*.txt")
     files.sort()
@@ -42,7 +43,7 @@ def getBoundingBoxes():
         fh1 = open(f, "r")
         for line in fh1:
             line = line.replace("\n", "")
-            if line.replace(' ', '') == '':
+            if line.replace(" ", "") == "":
                 continue
             splitLine = line.split(" ")
             idClass = splitLine[0]  # class
@@ -57,13 +58,15 @@ def getBoundingBoxes():
                 y,
                 w,
                 h,
-                CoordinatesType.Absolute, (200, 200),
+                CoordinatesType.Absolute,
+                (200, 200),
                 BBType.GroundTruth,
-                format=BBFormat.XYWH)
+                format=BBFormat.XYWH,
+            )
             allBoundingBoxes.addBoundingBox(bb)
         fh1.close()
     # Read detections
-    folderDet = os.path.join(currentPath, 'detections')
+    folderDet = os.path.join(currentPath, "detections")
     os.chdir(folderDet)
     files = glob.glob("*.txt")
     files.sort()
@@ -81,7 +84,7 @@ def getBoundingBoxes():
         fh1 = open(f, "r")
         for line in fh1:
             line = line.replace("\n", "")
-            if line.replace(' ', '') == '':
+            if line.replace(" ", "") == "":
                 continue
             splitLine = line.split(" ")
             idClass = splitLine[0]  # class
@@ -97,10 +100,12 @@ def getBoundingBoxes():
                 y,
                 w,
                 h,
-                CoordinatesType.Absolute, (200, 200),
+                CoordinatesType.Absolute,
+                (200, 200),
                 BBType.Detected,
                 confidence,
-                format=BBFormat.XYWH)
+                format=BBFormat.XYWH,
+            )
             allBoundingBoxes.addBoundingBox(bb)
         fh1.close()
     return allBoundingBoxes
@@ -110,6 +115,7 @@ def createImages(dictGroundTruth, dictDetected):
     """Create representative images with bounding boxes."""
     import numpy as np
     import cv2
+
     # Define image size
     width = 200
     height = 200
@@ -140,21 +146,23 @@ evaluator.PlotPrecisionRecallCurve(
     IOUThreshold=0.3,  # IOU threshold
     method=MethodAveragePrecision.EveryPointInterpolation,  # As the official matlab code
     showAP=True,  # Show Average Precision in the title of the plot
-    showInterpolatedPrecision=True)  # Plot the interpolated precision curve
+    showInterpolatedPrecision=True,
+)  # Plot the interpolated precision curve
 # Get metrics with PASCAL VOC metrics
 metricsPerClass = evaluator.GetPascalVOCMetrics(
     boundingboxes,  # Object containing all bounding boxes (ground truths and detections)
     IOUThreshold=0.3,  # IOU threshold
-    method=MethodAveragePrecision.EveryPointInterpolation)  # As the official matlab code
+    method=MethodAveragePrecision.EveryPointInterpolation,
+)  # As the official matlab code
 print("Average precision values per class:\n")
 # Loop through classes to obtain their metrics
 for mc in metricsPerClass:
     # Get metric values per each class
-    c = mc['class']
-    precision = mc['precision']
-    recall = mc['recall']
-    average_precision = mc['AP']
-    ipre = mc['interpolated precision']
-    irec = mc['interpolated recall']
+    c = mc["class"]
+    precision = mc["precision"]
+    recall = mc["recall"]
+    average_precision = mc["AP"]
+    ipre = mc["interpolated precision"]
+    irec = mc["interpolated recall"]
     # Print AP per class
-    print('%s: %f' % (c, average_precision))
+    print("%s: %f" % (c, average_precision))
