@@ -18,11 +18,10 @@ import shutil
 # from argparse import RawTextHelpFormatter
 import sys
 
-import _init_paths
-from BoundingBox import BoundingBox
-from BoundingBoxes import BoundingBoxes
-from Evaluator import *
-from utils import BBFormat
+from od_metrics.BoundingBox import BoundingBox
+from od_metrics.BoundingBoxes import BoundingBoxes
+from od_metrics.Evaluator import *
+from od_metrics.utils import BBFormat
 
 
 # Validate formats

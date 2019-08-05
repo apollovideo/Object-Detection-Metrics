@@ -8,15 +8,14 @@ If you just want to evaluate your detections dealing with a high level interface
 
 ### The code
 
-The classes BoudingBox and BoundingBoxes are in the `lib/` folder. The file `_init_paths.py` imports these contents into our example. The file `utils.py` contains basically enumerators and useful functions. The code below shows how to import them:  
+The classes BoundingBox and BoundingBoxes are in the `od_metrics/` folder. The file `utils.py` contains basically enumerators and useful functions. The code below shows how to import them:  
 
 ```python
-import _init_paths
-from utils import *
-from BoundingBox import BoundingBox
-from BoundingBoxes import BoundingBoxes
+from od_metrics.utils import *
+from od_metrics.BoundingBox import BoundingBox
+from od_metrics.BoundingBoxes import BoundingBoxes
 ```
-Don't forget to put the content of the folder `\lib` in the same folder of your code.
+Don't forget to put the content of the folder `\od_metrics` in the same folder of your code.
 
 All bounding boxes (detected and ground truth) are represented by objects of the class `BoundingBox`. Each bounding box is created using the constructor. Use the parameter `bbType` to identify if the box is a ground truth or a detected one. The parameter `imageName` determines the image that the box belongs to. All the parameters used to create the object are:  
 

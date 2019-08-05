@@ -14,11 +14,10 @@
 
 import os
 
-import _init_paths
 import cv2
-from BoundingBox import BoundingBox
-from BoundingBoxes import BoundingBoxes
-from utils import *
+from od_metrics.BoundingBox import BoundingBox
+from od_metrics.BoundingBoxes import BoundingBoxes
+from od_metrics.utils import *
 
 ###########################
 # Defining bounding boxes #
